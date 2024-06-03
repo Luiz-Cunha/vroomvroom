@@ -1,0 +1,2 @@
+class RentMotorcycle < ApplicationRecord
+end
