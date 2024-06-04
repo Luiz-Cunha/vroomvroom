@@ -1,15 +1,25 @@
 class MotorcyclesController < ApplicationController
+  skip_before_action :authenticate_user!, only: :index
 
   def index
+    @motorcycles = Motorcycle.all
   end
 
   def show
   end
 
   def new
+    @motorcycle = Motorcycle.new
   end
 
   def create
+    @motorcycle = Motorcycle.new(motorcycle_params)
+    @motorcycle.user = current_user
+    if @motorcycle.save
+      redirect_to motorcycles_path
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def edit
@@ -31,11 +41,12 @@ class MotorcyclesController < ApplicationController
 
   private
 
-  def motorcycle_params
-    params.require(:motorcycle).permit(:image_url, :description, :make, :model, :year, :user_id)
-  end
-
   def set_motorcycle
     @motorcycle = Motorcycle.find(params[:id])
+  end
+
+  def motorcycle_params
+    params.require(:motorcycle).permit(:make, :model, :typeM, :year, :description, :photo)
+
   end
 end
