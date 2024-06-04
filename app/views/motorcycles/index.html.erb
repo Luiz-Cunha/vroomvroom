@@ -1,2 +1,8 @@
-<h1>Motorcycles#index</h1>
-<p>Find me in app/views/motorcycles/index.html.erb</p>
+<h1>VroomVroom</h1>
+<ul>
+  <% @motorcycles.each do |motorcycle| %>
+    <li><p><%= motorcycle.model %></p>
+        <p><%= motorcycle.year %></p>
+      </li>
+  <% end %>
+</ul>
