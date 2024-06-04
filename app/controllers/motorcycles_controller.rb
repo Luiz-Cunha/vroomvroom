@@ -1,5 +1,6 @@
 class MotorcyclesController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
+
   def index
     @motorcycles = Motorcycle.all
   end
@@ -22,16 +23,30 @@ class MotorcyclesController < ApplicationController
   end
 
   def edit
+    @motorcycle = Motorcycle.find(params[:id])
+
   end
 
   def update
+    @motorcycle = Motorcycle.find(params[:id])
+    if @motorcycle.update(motorcycle_params)
+      redirect_to @motorcycle, notice: "Motorcycle was successfully updated.", status: :see_other
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
   end
 
   private
+
+  def set_motorcycle
+    @motorcycle = Motorcycle.find(params[:id])
+  end
+
   def motorcycle_params
     params.require(:motorcycle).permit(:make, :model, :typeM, :year, :description, :photo)
+
   end
 end

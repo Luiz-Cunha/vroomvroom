@@ -1,2 +1,10 @@
 <h1>Motorcycles#edit</h1>
 <p>Find me in app/views/motorcycles/edit.html.erb</p>
+<%= simple_form_for @motorcycle do |f| %>
+  <%= f.input :description%>
+  <%= f.input :type%>
+  <%= f.input :make%>
+  <%= f.input :model%>
+  <%= f.number_field :year%>
+  <%= f.button :submit %>
+<% end %>
