@@ -3,6 +3,7 @@
   <% @motorcycles.each do |motorcycle| %>
     <li><p><%= motorcycle.model %></p>
         <p><%= motorcycle.year %></p>
+        <%= cl_image_tag motorcycle.photo.key, height: 300, width: 400, crop: :fill %>
       </li>
   <% end %>
 </ul>
