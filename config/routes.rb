@@ -13,7 +13,5 @@ Rails.application.routes.draw do
   get "motorcycles/:id", to: "motorcycles#show"
   devise_for :users
 
-  resources :motorcycles, only: [:index, :show, :new, :create, :edit, :update, :destroy]
-
-  root "motorcycles#index"
+  resources :motorcycles, only: [:show]
 end

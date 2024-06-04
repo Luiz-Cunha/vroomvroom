@@ -7,4 +7,4 @@ class Motorcycle < ApplicationRecord
   end
 
   validates :image_url, :description, :motorcycle_type, :make, :model, :year, presence: true
-  end
+end
