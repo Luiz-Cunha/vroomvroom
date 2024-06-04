@@ -1,6 +1,6 @@
-<h2><%= image_tag(@motorcycle.image_url) if @motorcycle.image_url.present? %></h2>
+<h2><%= cl_image_tag(@motorcycle.photo.key) if @motorcycle.photo.key.present? %></h2>
 <p><%= @motorcycle.description %></p>
-<p>Type: <%= @motorcycle.motorcycle_type %></p>
+<p>Type: <%= @motorcycle.typeM %></p>
 <p>Make: <%= @motorcycle.make %></p>
 <p>Model: <%= @motorcycle.model %></p>
 <p>Year: <%= @motorcycle.year %></p>
