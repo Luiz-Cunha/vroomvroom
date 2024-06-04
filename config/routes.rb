@@ -1,18 +1,6 @@
 Rails.application.routes.draw do
-  get 'rent_motorcycles/index'
-  get 'rent_motorcycles/show'
-  get 'rent_motorcycles/new'
-  get 'rent_motorcycles/create'
-  get 'rent_motorcycles/edit'
-  get 'rent_motorcycles/update'
-  get 'rent_motorcycles/destroy'
-  get 'motorcycles/index'
-  get 'motorcycles/show'
-  get 'motorcycles/new'
-  get 'motorcycles/create'
-  get 'motorcycles/edit'
-  get 'motorcycles/update'
-  get 'motorcycles/destroy'
+  devise_for :users
+
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
