@@ -1,6 +1,8 @@
-<h2><%= @motorcycle.image.rul %></h2>
+<h2><%= image_tag(@motorcycle.image_url) if @motorcycle.image_url.present? %></h2>
 <p><%= @motorcycle.description %></p>
-<p><%= @motorcycle.type %></p>
-<p><%= @motorcycle.make %></p>
-<p><%= @motorcycle.model %></p>
-<p><%= @motorcycle.year %></p>
+<p>Type: <%= @motorcycle.motorcycle_type %></p>
+<p>Make: <%= @motorcycle.make %></p>
+<p>Model: <%= @motorcycle.model %></p>
+<p>Year: <%= @motorcycle.year %></p>
+
+<%= link_to 'Back to Motorcycles', motorcycles_path %>

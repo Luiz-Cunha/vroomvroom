@@ -5,4 +5,6 @@ class Motorcycle < ApplicationRecord
   def show
     @motorcycle = Motorcycle.find(params[:id])
   end
-end
+
+  validates :image_url, :description, :motorcycle_type, :make, :model, :year, presence: true
+  end
