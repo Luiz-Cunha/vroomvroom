@@ -1,6 +1,8 @@
 <h1>VroomVroom</h1>
 <ul>
   <% @motorcycles.each do |motorcycle| %>
-    <li><%= motorcycle.model %><%= motorcycle.type %><%= motorcycle.year %><%= motorcycle.image_url %></li>
+    <li><p><%= motorcycle.model %></p>
+        <p><%= motorcycle.year %></p>
+      </li>
   <% end %>
 </ul>
