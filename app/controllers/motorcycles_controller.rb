@@ -1,11 +1,13 @@
 class MotorcyclesController < ApplicationController
 
+  skip_before_action :authenticate_user!, only: :index
+  before_action :set_motorcycle, only: [:show, :edit, :update, :destroy]
+
   def index
     @motorcycles = Motorcycle.all
   end
 
   def show
-    @motorcycle = Motorcycle.find(params[:id])
     @rent_motorcycle = RentMotorcycle.new
   end
 
@@ -24,12 +26,9 @@ class MotorcyclesController < ApplicationController
   end
 
   def edit
-    @motorcycle = Motorcycle.find(params[:id])
-
   end
 
   def update
-    @motorcycle = Motorcycle.find(params[:id])
     if @motorcycle.update(motorcycle_params)
       redirect_to @motorcycle, notice: "Motorcycle was successfully updated.", status: :see_other
     else
@@ -38,6 +37,8 @@ class MotorcyclesController < ApplicationController
   end
 
   def destroy
+    @motorcycle.destroy
+    redirect_to motorcycles_path, status: :see_other
   end
 
   private
