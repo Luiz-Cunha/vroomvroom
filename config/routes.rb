@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :motorcycles, only: [:edit, :update, :new, :create, :index, :show] do
-    resources :rent_motorcycles, only: [:create, :index]
+    resources :rent_motorcycles, only: [:new, :create, :index]
   end
 
   resources :rent_motorcycles, only: [] do
