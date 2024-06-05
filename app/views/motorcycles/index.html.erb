@@ -4,6 +4,9 @@
     <li><p><%= motorcycle.model %></p>
         <p><%= motorcycle.year %></p>
         <%= cl_image_tag motorcycle.photo.key, height: 300, width: 400, crop: :fill %>
+        <%= link_to "New", new_motorcycle_path %>
+        <%= link_to "Edit", edit_motorcycle_path(motorcycle)%>
+        <%= link_to "Delete", motorcycle_path(motorcycle), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
       </li>
-  <% end %>
+    <% end %>
 </ul>

@@ -1,5 +1,6 @@
 class MotorcyclesController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
+  before_action :set_motorcycle, only: [:show, :edit, :update, :destroy]
 
   def index
     @motorcycles = Motorcycle.all
@@ -38,6 +39,9 @@ class MotorcyclesController < ApplicationController
   end
 
   def destroy
+    @motorcycle = Motorcycle.find(params[:id])
+    @motorcycle.destroy
+    redirect_to motorcycles_path, status: :see_other
   end
 
   private

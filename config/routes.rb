@@ -8,6 +8,6 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :motorcycles, only: [:edit, :update, :new, :create, :index, :show]
+  resources :motorcycles, only: [:destroy]
 
 end
-  
