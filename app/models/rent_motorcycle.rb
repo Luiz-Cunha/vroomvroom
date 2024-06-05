@@ -14,7 +14,7 @@ class RentMotorcycle < ApplicationRecord
     else
       self.total_price = 0
     end
-
+  end
   private
 
   def set_default_status
