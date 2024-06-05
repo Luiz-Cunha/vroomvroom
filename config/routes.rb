@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'wishlists/create'
+  get 'wishlists/destroy'
   root to: "pages#home"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -17,5 +19,9 @@ Rails.application.routes.draw do
       patch :approve
       patch :reject
     end
+  end
+
+  resources :motorcycles do
+    resource :wishlist, only: [:create, :destroy], controller: 'wishlists'
   end
 end

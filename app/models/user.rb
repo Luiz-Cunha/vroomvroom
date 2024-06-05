@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :motorcycles
   has_many :rent_motorcycles
+  has_many :wishlists
+  has_many :motorcycles, through: :wishlists
 end
