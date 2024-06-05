@@ -1,8 +1,48 @@
-<h2><%= cl_image_tag(@motorcycle.photo.key) if @motorcycle.photo.key.present? %></h2>
-<p><%= @motorcycle.description %></p>
-<p>Type: <%= @motorcycle.typeM %></p>
-<p>Make: <%= @motorcycle.make %></p>
-<p>Model: <%= @motorcycle.model %></p>
-<p>Year: <%= @motorcycle.year %></p>
+<div class="container">
+<%= link_to 'Back to Motorcycles', motorcycles_path, class: "btn btn-primary mt-5" %>
+  <div class="row">
+  <div class="col-lg-6 p-5">
+    <div class="card">
+      <div class="card-header">
+        <% if @motorcycle.photo.key.present? %>
+          <%= cl_image_tag(@motorcycle.photo.key, class: "card-img-top img-fluid") %>
+        <% end %>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"><%= @motorcycle.description %></h5>
+        <ul class="list-unstyled">
+          <li><strong>Type:</strong> <%= @motorcycle.typeM %></li>
+          <li><strong>Make:</strong> <%= @motorcycle.make %></li>
+          <li><strong>Model:</strong> <%= @motorcycle.model %></li>
+          <li><strong>Year:</strong> <%= @motorcycle.year %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-<%= link_to 'Back to Motorcycles', motorcycles_path %>
+  <div class="col-6 p-5">
+
+    <h1>Create a new Reservation</h1>
+    <%= simple_form_for([@motorcycle, @rent_motorcycle], data: { controller:"total-price", total_price_price_value: @motorcycle.price }) do |f| %>
+      <%= f.input :start_date, as: :date, order: [ :day, :month, :year ], input_html: { data: { total_price_target: 'startDate', action: 'change->total-price#calculate'} } %>
+      <%= f.input :end_date, as: :date, order: [ :day, :month, :year ], input_html: { data: { total_price_target: 'endDate', action: 'change->total-price#calculate'} } %>
+      <div class="mb-3 string">
+        <label for="total-price" class='form-label'>Total price</label>
+        <p class='form-control'name="total-price" id="totalPrice" data-total-price-target='input'></p>
+      </div>
+    <%= f.submit class: 'btn btn-primary' %>
+  <% end %>
+  </div>
+  </div>
+</div>
+
+<% if @motorcycle.user == current_user %>
+  <h3>Pending Rental Requests</h3>
+  <% @motorcycle.rent_motorcycles.where(status: 'pending').each do |request| %>
+    <p>
+      <%= request.user.name %> has requested to rent from <%= request.start_date %> to <%= request.end_date %>.
+      <%= link_to 'Approve', approve_rent_motorcycle_path(request), method: :patch, class: 'btn btn-success' %>
+      <%= link_to 'Reject', reject_rent_motorcycle_path(request), method: :patch, class: 'btn btn-danger' %>
+    </p>
+  <% end %>
+<% end %>
