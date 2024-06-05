@@ -7,6 +7,7 @@ class MotorcyclesController < ApplicationController
 
   def show
     @motorcycle = Motorcycle.find(params[:id])
+    @rent_motorcycle = RentMotorcycle.new
   end
 
   def new
@@ -47,7 +48,7 @@ class MotorcyclesController < ApplicationController
   end
 
   def motorcycle_params
-    params.require(:motorcycle).permit(:make, :model, :typeM, :year, :description, :photo)
+    params.require(:motorcycle).permit(:make, :model, :typeM, :year, :description, :price, :photo)
 
   end
 end

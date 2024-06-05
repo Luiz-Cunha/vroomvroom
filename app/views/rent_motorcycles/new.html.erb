@@ -1,2 +1,12 @@
-<h1>RentMotorcycles#new</h1>
-<p>Find me in app/views/rent_motorcycles/new.html.erb</p>
+<div class="container">
+  <h1>Create a new Motorcycle</h1>
+  <%= simple_form_for([@motorcycle, @rent_motorcycle], data: { controller:"total-price", total_price_price_value: @motorcycle.price }) do |f| %>
+    <%= f.input :start_date, as: :date, order: [ :day, :month, :year ], input_html: { data: { total_price_target: 'startDate', action: 'change->total-price#calculate'} } %>
+    <%= f.input :end_date, as: :date, order: [ :day, :month, :year ], input_html: { data: { total_price_target: 'endDate', action: 'change->total-price#calculate'} } %>
+    <div class="mb-3 string">
+      <label for="total-price" class='form-label'>Total price</label>
+      <p class='form-control'name="total-price" id="totalPrice" data-total-price-target='input'></p>
+    </div>
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>
+</div>
