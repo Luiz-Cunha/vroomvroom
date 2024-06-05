@@ -6,3 +6,14 @@
 <p>Year: <%= @motorcycle.year %></p>
 
 <%= link_to 'Back to Motorcycles', motorcycles_path %>
+
+<% if @motorcycle.user == current_user %>
+  <h3>Pending Rental Requests</h3>
+  <% @motorcycle.rent_motorcycles.where(status: 'pending').each do |request| %>
+    <p>
+      <%= request.user.name %> has requested to rent from <%= request.start_date %> to <%= request.end_date %>.
+      <%= link_to 'Approve', approve_rent_motorcycle_path(request), method: :patch, class: 'btn btn-success' %>
+      <%= link_to 'Reject', reject_rent_motorcycle_path(request), method: :patch, class: 'btn btn-danger' %>
+    </p>
+  <% end %>
+<% end %>

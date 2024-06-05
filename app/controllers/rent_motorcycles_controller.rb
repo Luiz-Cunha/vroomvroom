@@ -19,4 +19,20 @@ class RentMotorcyclesController < ApplicationController
 
   def destroy
   end
+
+  def approve
+    @rent_motorcycle.update(status: 'approved')
+    redirect_to motorcycle_path(@rent_motorcycle.motorcycle), notice: 'Rental request approved.'
+  end
+
+  def reject
+    @rent_motorcycle.update(status: 'rejected')
+    redirect_to motorcycle_path(@rent_motorcycle.motorcycle), notice: 'Rental request rejected.'
+  end
+
+  private
+
+  def set_rent_motorcycle
+    @rent_motorcycle = RentMotorcycle.find(params[:id])
+  end
 end
