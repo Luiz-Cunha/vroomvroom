@@ -11,6 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2024_06_05_182824) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -44,7 +45,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_05_182824) do
 
   create_table "motorcycles", force: :cascade do |t|
     t.string "description"
-    t.string "typeM"
     t.string "make"
     t.string "model"
     t.integer "year"
@@ -52,6 +52,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_05_182824) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.integer "price"
+    t.string "typeM"
     t.index ["user_id"], name: "index_motorcycles_on_user_id"
   end
 
@@ -63,6 +64,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_05_182824) do
     t.bigint "user_id", null: false
     t.bigint "motorcycle_id", null: false
     t.integer "total_price"
+    t.string "status"
     t.index ["motorcycle_id"], name: "index_rent_motorcycles_on_motorcycle_id"
     t.index ["user_id"], name: "index_rent_motorcycles_on_user_id"
   end
