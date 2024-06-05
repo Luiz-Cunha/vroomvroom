@@ -7,7 +7,15 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   devise_for :users
-  resources :motorcycles, only: [:edit, :update, :new, :create, :index, :show]
 
+  resources :motorcycles, only: [:edit, :update, :new, :create, :index, :show] do
+    resources :rent_motorcycles, only: [:create, :index]
+  end
+
+  resources :rent_motorcycles, only: [] do
+    member do
+      patch :approve
+      patch :reject
+    end
+  end
 end
-  
