@@ -7,4 +7,6 @@ class User < ApplicationRecord
   has_many :rent_motorcycles
   has_many :wishlists
   has_many :motorcycles, through: :wishlists
+  has_many :rented_motorcycles, class_name: 'RentMotorcycle'
+
 end

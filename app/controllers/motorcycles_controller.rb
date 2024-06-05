@@ -1,12 +1,12 @@
 class MotorcyclesController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
+  before_action :set_motorcycle, only: [:show, :edit, :update, :destroy]
 
   def index
     @motorcycles = Motorcycle.all
   end
 
   def show
-    @motorcycle = Motorcycle.find(params[:id])
   end
 
   def new
@@ -24,12 +24,9 @@ class MotorcyclesController < ApplicationController
   end
 
   def edit
-    @motorcycle = Motorcycle.find(params[:id])
-
   end
 
   def update
-    @motorcycle = Motorcycle.find(params[:id])
     if @motorcycle.update(motorcycle_params)
       redirect_to @motorcycle, notice: "Motorcycle was successfully updated.", status: :see_other
     else
@@ -38,6 +35,8 @@ class MotorcyclesController < ApplicationController
   end
 
   def destroy
+    @motorcycle.destroy
+    redirect_to dashboard_path, notice: 'Motorcycle was successfully deleted.'
   end
 
   private
@@ -48,6 +47,5 @@ class MotorcyclesController < ApplicationController
 
   def motorcycle_params
     params.require(:motorcycle).permit(:make, :model, :typeM, :year, :description, :photo)
-
   end
 end

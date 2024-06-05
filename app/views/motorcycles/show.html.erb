@@ -21,11 +21,3 @@
     </p>
   <% end %>
 <% end %>
-
-<% if user_signed_in? %>
-  <% if current_user.favorite_motorcycles.exists?(@motorcycle.id) %>
-    <%= link_to 'Remove from Wishlist', motorcycle_wishlist_path(@motorcycle), method: :delete, class: 'btn btn-danger' %>
-  <% else %>
-    <%= link_to 'Add to Wishlist', motorcycle_wishlist_path(@motorcycle), method: :post, class: 'btn btn-primary' %>
-  <% end %>
-<% end %>
