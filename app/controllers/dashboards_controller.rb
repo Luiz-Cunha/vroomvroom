@@ -2,7 +2,7 @@ class DashboardsController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    @rented_motorcycles = current_user.rented_motorcycles
+    @rented_motorcycles = current_user.rent_motorcycles
     @listed_motorcycles = current_user.motorcycles
   end
 

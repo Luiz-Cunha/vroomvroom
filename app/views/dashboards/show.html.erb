@@ -18,7 +18,9 @@
   <% @listed_motorcycles.each do |motorcycle| %>
     <p>
       <strong>Motorcycle:</strong> <%= motorcycle.make %> <%= motorcycle.model %><br>
-      <strong>Status:</strong> <%= motorcycle.status %>
+      <strong>Status:</strong> <% motorcycle.rent_motorcycles.each do |rental| %>
+      <p><%= rental.status %></p>
+      <% end %>
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
           Actions
