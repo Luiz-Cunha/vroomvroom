@@ -3,7 +3,7 @@ class CreateMotorcycles < ActiveRecord::Migration[7.1]
     create_table :motorcycles do |t|
       t.string :image_url
       t.string :description
-      t.string :type
+      t.string :typeM
       t.string :make
       t.string :model
       t.integer :year
