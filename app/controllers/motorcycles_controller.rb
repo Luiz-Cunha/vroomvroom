@@ -1,4 +1,5 @@
 class MotorcyclesController < ApplicationController
+
   skip_before_action :authenticate_user!, only: :index
   before_action :set_motorcycle, only: [:show, :edit, :update, :destroy]
 
@@ -7,6 +8,7 @@ class MotorcyclesController < ApplicationController
   end
 
   def show
+    @rent_motorcycle = RentMotorcycle.new
   end
 
   def new
@@ -46,6 +48,6 @@ class MotorcyclesController < ApplicationController
   end
 
   def motorcycle_params
-    params.require(:motorcycle).permit(:make, :model, :typeM, :year, :description, :photo)
+    params.require(:motorcycle).permit(:make, :model, :typeM, :year, :description, :price, :photo)
   end
 end

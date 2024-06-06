@@ -1,9 +1,37 @@
-<h1>VroomVroom</h1>
-<ul>
-  <% @motorcycles.each do |motorcycle| %>
-    <li><p><%= motorcycle.model %></p>
-        <p><%= motorcycle.year %></p>
-        <%= cl_image_tag motorcycle.photo.key, height: 300, width: 400, crop: :fill %>
-      </li>
-  <% end %>
-</ul>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1558981420-87aa9dad1c89?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
+  <div class="container">
+    <h1>Making your trips more radical!</h1>
+    <p>Rent the ride of your dreams and hit the road with <strong>VroomVroom!<strong></p>
+  </div>
+</div>
+<div class="flexbox">
+<i class="fa-solid fa-magnifying-glass fa-5x"></i>
+<i class="fa-regular fa-calendar-check fa-5x"></i>
+<i class="fa-solid fa-motorcycle fa-5x"></i>
+</div>
+
+<div class="container mt-3">
+<div class="cards">
+ <% @motorcycles.each do |motorcycle| %>
+      <div class="card">
+        <div class="card-header">
+          <% if motorcycle.photo.key.present? %>
+            <%= cl_image_tag(motorcycle.photo.key, class: "card-img-top img-fluid") %>
+          <% end %>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><%= motorcycle.description %></h5>
+          <ul class="list-unstyled">
+            <li><strong>Type:</strong> <%= motorcycle.typeM %></li>
+            <li><strong>Make:</strong> <%= motorcycle.make %></li>
+            <li><strong>Model:</strong> <%= motorcycle.model %></li>
+            <li><strong>Year:</strong> <%= motorcycle.year %></li>
+          </ul>
+           <%= link_to "Edit", edit_motorcycle_path(motorcycle)%>
+           <%= link_to "Delete", motorcycle_path(motorcycle), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+           <%= link_to "Show details", motorcycle_path(motorcycle) %>
+        </div>
+      </div>
+ <% end %>
+</div>
+</div>
