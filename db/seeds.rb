@@ -3,7 +3,12 @@ require "open-uri"
 User.destroy_all
 Motorcycle.destroy_all
 
-user1 = User.create!(
+fileprof1 = URI.open("https://blog.polipet.com.br/wp-content/uploads/2024/01/pato-445x445.jpeg")
+fileprof2 = URI.open("https://blog.polipet.com.br/wp-content/uploads/2024/01/pato-445x445.jpeg")
+fileprof3 = URI.open("https://blog.polipet.com.br/wp-content/uploads/2024/01/pato-445x445.jpeg")
+fileprof4 = URI.open("https://blog.polipet.com.br/wp-content/uploads/2024/01/pato-445x445.jpeg")
+
+user1 = User.new(
   email: "andre@lewagon.com",
   password: "password123",
   password_confirmation: "password123",
@@ -13,7 +18,10 @@ user1 = User.create!(
   address: "123 Main St, San Francisco, CA"
 )
 
-user2 = User.create!(
+user1.photo.attach(io: fileprof1, filename: "andre_profile_pic.png", content_type: "image/png")
+user1.save
+
+user2 = User.new(
   email: "chloe@lewagon.com",
   password: "password123",
   password_confirmation: "password123",
@@ -23,7 +31,10 @@ user2 = User.create!(
   address: "456 Elm St, Los Angeles, CA"
 )
 
-user3 = User.create!(
+user2.photo.attach(io: fileprof2, filename: "chloe_profile_pic.png", content_type: "image/png")
+user2.save
+
+user3 = User.new(
   email: "sam@lewagon.com",
   password: "password123",
   password_confirmation: "password123",
@@ -33,7 +44,10 @@ user3 = User.create!(
   address: "789 Maple Ave, New York, NY"
 )
 
-user4 = User.create!(
+user3.photo.attach(io: fileprof3, filename: "sam_profile_pic.png", content_type: "image/png")
+user3.save
+
+user4 = User.new(
   email: "lisa@lewagon.com",
   password: "password123",
   password_confirmation: "password123",
@@ -42,6 +56,9 @@ user4 = User.create!(
   age: 32,
   address: "321 Oak St, Chicago, IL"
 )
+
+user4.photo.attach(io: fileprof4, filename: "lisa_profile_pic.png", content_type: "image/png")
+user4.save
 
 puts "Created users:"
 puts "User 1: #{user1.name} (#{user1.email})"
