@@ -1,49 +1,71 @@
-<h1>Dashboard</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard</title>
+  <link rel="stylesheet" href="path/to/dashboard.css">
+</head>
+<body>
+  <h1>Dashboard</h1>
 
-<h2>Rented Motorcycles</h2>
-<% if @rented_motorcycles.any? %>
-  <% @rented_motorcycles.each do |rented_motorcycle| %>
-    <p>
-      <strong>Motorcycle:</strong> <%= rented_motorcycle.motorcycle.make %> <%= rented_motorcycle.motorcycle.model %><br>
-      <strong>Address:</strong> <%= rented_motorcycle.motorcycle.user.address %><br>
-      <strong>Start Date:</strong> <%= rented_motorcycle.start_date %><br>
-      <strong>End Date:</strong> <%= rented_motorcycle.end_date %>
-    </p>
-  <% end %>
-<% else %>
-  <p>No rented motorcycles.</p>
-<% end %>
-
-<h2>Listed Motorcycles</h2>
-<% if @listed_motorcycles.any? %>
-  <% @listed_motorcycles.each do |motorcycle| %>
-    <p>
-      <strong>Motorcycle:</strong> <%= motorcycle.make %> <%= motorcycle.model %><br>
-      <strong>Status:</strong> <% motorcycle.rent_motorcycles.each do |rental| %>
-      <p><%= rental.status %></p>
+  <div class="dashboard-container">
+    <div class="rented-motorcycles">
+      <h2>Rented Motorcycles</h2>
+      <% if @rented_motorcycles.any? %>
+        <% @rented_motorcycles.each do |rented_motorcycle| %>
+          <div class="motorcycle-card">
+            <p>
+              <strong>Motorcycle:</strong> <%= rented_motorcycle.motorcycle.make %> <%= rented_motorcycle.motorcycle.model %><br>
+              <strong>Start Date:</strong> <%= rented_motorcycle.start_date %><br>
+              <strong>End Date:</strong> <%= rented_motorcycle.end_date %>
+            </p>
+          </div>
+        <% end %>
+      <% else %>
+        <p>No rented motorcycles.</p>
       <% end %>
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-          Actions
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <li><%= link_to 'Edit', edit_motorcycle_path(motorcycle), class: 'dropdown-item' %></li>
-          <li><%= link_to 'Delete', motorcycle, method: :delete, data: { confirm: 'Are you sure?' }, class: 'dropdown-item' %></li>
-        </ul>
-      </div>
-    </p>
+    </div>
 
-    <h3>Pending Requests</h3>
-    <% motorcycle.rent_motorcycles.where(status: 'pending').each do |request| %>
-      <p>
-        <strong>Requester:</strong> <%= request.user.name %><br>
-        <strong>Requested Dates:</strong> <%= request.start_date %> to <%= request.end_date %><br>
-        <%= link_to 'Approve', approve_request_dashboard_path(request), method: :patch, class: 'btn btn-success' %>
-        <%= link_to 'Reject', reject_request_dashboard_path(request), method: :patch, class: 'btn btn-danger' %>
-        <%= link_to 'Decide Later', decide_later_request_dashboard_path(request), method: :patch, class: 'btn btn-warning' %>
-      </p>
-    <% end %>
-  <% end %>
-<% else %>
-  <p>No listed motorcycles.</p>
-<% end %>
+    <div class="listed-motorcycles">
+      <h2>Listed Motorcycles</h2>
+      <% if @listed_motorcycles.any? %>
+        <% @listed_motorcycles.each do |motorcycle| %>
+          <div class="motorcycle-card">
+            <p>
+              <strong>Motorcycle:</strong> <%= motorcycle.make %> <%= motorcycle.model %><br>
+              <strong>Status:</strong> <% motorcycle.rent_motorcycles.each do |rental| %>
+              <p><%= rental.status %></p>
+              <% end %>
+            </p>
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                Actions
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><%= link_to 'Edit', edit_motorcycle_path(motorcycle), class: 'dropdown-item' %></li>
+                <li><%= link_to 'Delete', motorcycle, method: :delete, data: { confirm: 'Are you sure?' }, class: 'dropdown-item' %></li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>Pending Requests</h3>
+          <% motorcycle.rent_motorcycles.where(status: 'pending').each do |request| %>
+            <div class="request-item">
+              <p>
+                <strong>Requester:</strong> <%= request.user.name %><br>
+                <strong>Requested Dates:</strong> <%= request.start_date %> to <%= request.end_date %><br>
+                <%= link_to 'Approve', approve_request_dashboard_path(request), method: :patch, class: 'btn btn-success' %>
+                <%= link_to 'Reject', reject_request_dashboard_path(request), method: :patch, class: 'btn btn-danger' %>
+                <%= link_to 'Decide Later', decide_later_request_dashboard_path(request), method: :patch, class: 'btn btn-warning' %>
+              </p>
+            </div>
+          <% end %>
+        <% end %>
+      <% else %>
+        <p>No listed motorcycles.</p>
+      <% end %>
+    </div>
+  </div>
+</body>
+</html>
