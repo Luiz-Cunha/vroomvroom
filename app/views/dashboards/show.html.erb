@@ -5,6 +5,7 @@
   <% @rented_motorcycles.each do |rented_motorcycle| %>
     <p>
       <strong>Motorcycle:</strong> <%= rented_motorcycle.motorcycle.make %> <%= rented_motorcycle.motorcycle.model %><br>
+      <strong>Address:</strong> <%= rented_motorcycle.motorcycle.user.address %><br>
       <strong>Start Date:</strong> <%= rented_motorcycle.start_date %><br>
       <strong>End Date:</strong> <%= rented_motorcycle.end_date %>
     </p>
