@@ -1,13 +1,45 @@
 <div class="container">
-  <h1>Create a new Motorcycle</h1>
-  <%= simple_form_for @motorcycle do |f| %>
-    <%= f.input :make %>
-    <%= f.input :model %>
-    <%= f.input :typeM %>
-    <%= f.input :year %>
-    <%= f.input :description %>
-    <%= f.input :price %>
-    <%= f.input :photo, as: :file %>
-    <%= f.button :submit, class: "btn btn-primary rounded-pill" %>
+  <h1 class="text-center my-4">Create a New Motorcycle</h1>
+  <%= simple_form_for @motorcycle, html: { class: 'form-horizontal' } do |f| %>
+    <div class="form-group row">
+      <div class="col-sm-12">
+        <%= f.input :make, input_html: { class: 'form-control', placeholder: 'Enter make' }, label_html: { class: 'form-label' } %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-12">
+        <%= f.input :model, input_html: { class: 'form-control', placeholder: 'Enter model' }, label_html: { class: 'form-label' } %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-12">
+        <%= f.input :typeM, input_html: { class: 'form-control', placeholder: 'Enter type' }, label_html: { class: 'form-label' } %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-12">
+        <%= f.input :year, input_html: { class: 'form-control', placeholder: 'Enter year' }, label_html: { class: 'form-label' } %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-12">
+        <%= f.input :description, input_html: { class: 'form-control', placeholder: 'Enter description' }, label_html: { class: 'form-label' } %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-12">
+        <%= f.input :price, input_html: { class: 'form-control', placeholder: 'Enter price' }, label_html: { class: 'form-label' } %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-12">
+        <%= f.input :photo, as: :file, input_html: { class: 'form-control-file' }, label_html: { class: 'form-label' } %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-12 text-center">
+        <%= f.button :submit, "Create Motorcycle", class: 'btn btn-secondary rounded-pill' %>
+      </div>
+    </div>
   <% end %>
 </div>
