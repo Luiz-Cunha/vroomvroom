@@ -38,7 +38,7 @@ class MotorcyclesController < ApplicationController
 
   def destroy
     @motorcycle.destroy
-    redirect_to motorcycles_path, status: :see_other
+    redirect_to dashboard_path, notice: 'Motorcycle was successfully deleted.'
   end
 
   private
@@ -49,6 +49,5 @@ class MotorcyclesController < ApplicationController
 
   def motorcycle_params
     params.require(:motorcycle).permit(:make, :model, :typeM, :year, :description, :price, :photo)
-
   end
 end

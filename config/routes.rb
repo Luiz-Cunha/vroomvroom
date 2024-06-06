@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   root 'motorcycles#index'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -6,6 +7,11 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
+  get 'dashboards/show'
+  get 'wishlists/create'
+  get 'wishlists/destroy'
+  get '/dashboard', to: 'dashboards#show', as: 'dashboard'
+  
   devise_for :users
 
   resources :motorcycles, only: [:edit, :update, :new, :create, :index, :show, :destroy] do
@@ -16,6 +22,19 @@ Rails.application.routes.draw do
     member do
       patch :approve
       patch :reject
+    end
+  end
+
+  resources :motorcycles do
+    resource :wishlist, only: [:create, :destroy], controller: 'wishlists'
+  end
+
+  resource :dashboard, only: [:show] do
+    member do
+      patch :approve_request
+      patch :reject_request
+      patch :decide_later_request
+
     end
   end
 end
