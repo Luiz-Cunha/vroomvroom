@@ -4,6 +4,7 @@ class RentMotorcycle < ApplicationRecord
   validates :start_date, :end_date, :status, presence: true
   validates :status, inclusion: { in: %w[pending approved rejected] }
 
+
   before_validation :set_default_status, on: :create
   after_validation :calculate_total_price
 

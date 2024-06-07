@@ -34,7 +34,7 @@ class RentMotorcyclesController < ApplicationController
 
   def rent_motorcycle_params
     params.require(:rent_motorcycle).permit(:start_date, :end_date)
-  end 
+  end
 
   def approve
     @rent_motorcycle.update(status: 'approved')
@@ -51,5 +51,5 @@ class RentMotorcyclesController < ApplicationController
   def set_rent_motorcycle
     @rent_motorcycle = RentMotorcycle.find(params[:id])
   end
-  
+
 end
