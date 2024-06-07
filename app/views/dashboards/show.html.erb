@@ -16,11 +16,13 @@
               <% else %>
                 <%= image_tag('default_motorcycle.png', class: "motorcycle-image", alt: "default motorcycle") %>
               <% end %>
-              <p>
-                <strong>Motorcycle:</strong> <%= rented_motorcycle.motorcycle.make %> <%= rented_motorcycle.motorcycle.model %><br>
-                <strong>Start Date:</strong> <%= rented_motorcycle.start_date %><br>
-                <strong>End Date:</strong> <%= rented_motorcycle.end_date %>
-              </p>
+              <div class="motorcycle-info">
+                <p>
+                  <strong>Motorcycle:</strong> <%= rented_motorcycle.motorcycle.make %> <%= rented_motorcycle.motorcycle.model %><br>
+                  <strong>Start Date:</strong> <%= rented_motorcycle.start_date %><br>
+                  <strong>End Date:</strong> <%= rented_motorcycle.end_date %>
+                </p>
+              </div>
             </div>
           </div>
         <% end %>
@@ -40,21 +42,23 @@
               <% else %>
                 <%= image_tag('default_motorcycle.png', class: "motorcycle-image", alt: "default motorcycle") %>
               <% end %>
-              <p>
-                <strong>Motorcycle:</strong> <%= motorcycle.make %> <%= motorcycle.model %><br>
-                <strong>Status:</strong>
-                <% motorcycle.rent_motorcycles.each do |rental| %>
-                  <p><%= rental.status %></p>
-                <% end %>
-              </p>
-              <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                  Actions
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <li><%= link_to 'Edit', edit_motorcycle_path(motorcycle), class: 'dropdown-item' %></li>
-                  <li><%= link_to 'Delete', motorcycle, method: :delete, data: { confirm: 'Are you sure?' }, class: 'dropdown-item' %></li>
-                </ul>
+              <div class="motorcycle-info">
+                <p>
+                  <strong>Motorcycle:</strong> <%= motorcycle.make %> <%= motorcycle.model %><br>
+                  <strong>Status:</strong>
+                  <% motorcycle.rent_motorcycles.each do |rental| %>
+                    <span><%= rental.status %></span>
+                  <% end %>
+                </p>
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    Actions
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li><%= link_to 'Edit', edit_motorcycle_path(motorcycle), class: 'dropdown-item' %></li>
+                    <li><%= link_to 'Delete', motorcycle, method: :delete, data: { confirm: 'Are you sure?' }, class: 'dropdown-item' %></li>
+                  </ul>
+                </div>
               </div>
             </div>
 
@@ -63,11 +67,11 @@
               <div class="request-item">
                 <p>
                   <strong>Requester:</strong> <%= request.user.name %><br>
-                  <strong>Requested Dates:</strong> <%= request.start_date %> to <%= request.end_date %>
+                  <strong>Requested Dates:</strong> <%= request.start_date %> to <%= request.end_date %><br>
+                  <%= link_to 'Approve', approve_request_dashboard_path(request), method: :patch, class: 'btn btn-success' %>
+                  <%= link_to 'Reject', reject_request_dashboard_path(request), method: :patch, class: 'btn btn-danger' %>
+                  <%= link_to 'Decide Later', decide_later_request_dashboard_path(request), method: :patch, class: 'btn btn-warning' %>
                 </p>
-                <%= link_to 'Approve', approve_request_dashboard_path(request), method: :patch, class: 'btn btn-success' %>
-                <%= link_to 'Reject', reject_request_dashboard_path(request), method: :patch, class: 'btn btn-danger' %>
-                <%= link_to 'Decide Later', decide_later_request_dashboard_path(request), method: :patch, class: 'btn btn-warning' %>
               </div>
             <% end %>
           </div>
