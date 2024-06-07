@@ -1,27 +1,38 @@
-<div class="container mt-5">
+<div class="container mt-5 vh-100">
+ <div class="d-flex justify-content-between">
+    <%= link_to 'Back to Motorcycles', motorcycles_path, class: "btn btn rounded-pill btn-sm ms-5 custom-btn"%>
+    <%= link_to 'Go to Dashboard', dashboard_path, class: 'btn btn rounded-pill btn-sm me-5 custom-btn' %>
+  </div>
   <div class="row">
   <div class="col-lg-6 p-5">
-    <div class="card">
-      <div class="card-header">
-        <% if @motorcycle.photo.key.present? %>
-          <%= cl_image_tag(@motorcycle.photo.key, class: "card-img-top img-fluid") %>
-        <% end %>
+  <div>
+      <div class="card custom-card">
+        <div class="card-category card-img-top img-fit" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path @motorcycle.photo.key, height: 300, crop: :fill %>'); background-size: cover; background-position: center;"></div>
       </div>
-      <div class="card-body">
-        <h5 class="card-title"><%= @motorcycle.description %></h5>
-        <ul class="list-unstyled">
-          <li><strong>Type:</strong> <%= @motorcycle.typeM %></li>
-          <li><strong>Make:</strong> <%= @motorcycle.make %></li>
-          <li><strong>Model:</strong> <%= @motorcycle.model %></li>
-          <li><strong>Year:</strong> <%= @motorcycle.year %></li>
-        </ul>
+
+      <div class="card p-3 text-right h-50 mt-2 border-0">
+        <div class="d-flex justify-content-between">
+          <blockquote class="blockquote mb-0 flex-grow-1">
+          <ul class="list-unstyled font-roboto">
+            <li style="color: black;"><%= @motorcycle.description %></li>
+            <br>
+            <li><%= @motorcycle.make %></li>
+            <br>
+            <li><%= @motorcycle.user.address %></li>
+          </ul>
+          </blockquote>
+          <footer class="align-self-end">
+            <small class="text-muted" style="color: black; font-weight: bold;">
+              <%= "$#{@motorcycle.price}/per day" %>
+            </small>
+          </footer>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="col-6 p-5">
-
-    <h1> Reservation</h1>
+    <h1>Rent this Motorcycle!</h1>
     <%= simple_form_for([@motorcycle, @rent_motorcycle], data: { controller:"total-price", total_price_price_value: @motorcycle.price }) do |f| %>
       <%= f.input :start_date, as: :date, order: [ :day, :month, :year ], input_html: { data: { total_price_target: 'startDate', action: 'change->total-price#calculate'} } %>
       <%= f.input :end_date, as: :date, order: [ :day, :month, :year ], input_html: { data: { total_price_target: 'endDate', action: 'change->total-price#calculate'} } %>
@@ -29,12 +40,8 @@
         <label for="total-price" class='form-label'>Total price</label>
         <p class='form-control'name="total-price" id="totalPrice" data-total-price-target='input'></p>
       </div>
-    <%= f.submit class: 'btn btn rounded-pill custom-btn' %>
+    <%= f.submit 'Book now', class: 'btn btn rounded-pill custom-btn' %>
   <% end %>
   </div>
   </div>
 </div>
-  <div class="d-flex justify-content-between">
-    <%= link_to 'Back to Motorcycles', motorcycles_path, class: "btn btn rounded-pill btn-sm ms-5 custom-btn"%>
-    <%= link_to 'Go to Dashboard', dashboard_path, class: 'btn btn rounded-pill btn-sm me-5 custom-btn' %>
-  </div>

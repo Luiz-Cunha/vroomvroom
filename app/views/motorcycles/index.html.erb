@@ -5,32 +5,28 @@
   </div>
 </div>
 
-<div class="flexbox">
   <div class="row justify-content-center">
-    <div class="col-sm-8 my-3">
+    <div class="col-sm-8 my-4">
       <%= form_with url: motorcycles_path, method: :get, class: "d-flex" do %>
-        <%= text_field_tag :query, params[:query], class: "form-control rounded-pill", placeholder: "Type a keyword" %>
-        <%= submit_tag "Search", name: "", class: "btn btn rounded-pill custom-btn" %>
+        <%= text_field_tag :query, params[:query], class: "form-control rounded-pill", placeholder: "Search by Make or Model" %>
+        <%= button_tag type: "submit", class: "btn btn-primary rounded-pill ml-2" do %>
+          <i class="fas fa-search"></i>
+        <% end %>
       <% end %>
     </div>
   </div>
-  <i class="fa-regular fa-calendar-check fa-5x"></i>
-  <i class="fa-solid fa-motorcycle fa-5x"></i>
-</div>
-
 
 <hr>
 <div class="container mt-5 vh-100">
 <div class="cards">
   <% @motorcycles.each do |motorcycle| %>
-    <div class="card m-2">
-      <div class="card-header position-relative">
-        <% if motorcycle.photo.key.present? %>
-          <%= link_to motorcycle_path(motorcycle) do%>
-            <%= cl_image_tag(motorcycle.photo.key, class: "card-img-top card-image") %>
-          <% end %>
-        <% end %>
-        <% if current_user && current_user.id == motorcycle.user_id %>
+  <div>
+    <div class="card custom-card">
+      <%= link_to motorcycle_path(motorcycle) do %>
+        <div class="card-category card-img-top img-fit" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path motorcycle.photo.key, height: 300, crop: :fill %>'); background-size: cover; background-position: center;">
+        </div>
+      <% end %>
+      <% if current_user && current_user.id == motorcycle.user_id %>
           <div class="icon-container">
             <%= link_to edit_motorcycle_path(motorcycle), class: "icon-link" do %>
               <i class="fas fa-edit"></i>
@@ -40,17 +36,27 @@
             <% end %>
           </div>
         <% end %>
-      </div>
-      <div class="card-body">
-        <h5 class="card-title"><%= motorcycle.description %></h5>
-        <ul class="list-unstyled">
-          <li><strong>Make:</strong> <%= motorcycle.make %></li>
-          <li><strong>Model:</strong> <%= motorcycle.model %></li>
-          <li><strong>Year:</strong> <%= motorcycle.year %></li>
-          <li><strong>Address:</strong> <%= motorcycle.user.address %></li>
+    </div>
+
+    <div class="card p-3 text-right h-50 mt-2 border-0">
+      <div class="d-flex justify-content-between">
+        <blockquote class="blockquote mb-0 flex-grow-1">
+        <ul class="list-unstyled font-roboto">
+          <li style="color: black;"><%= motorcycle.description %></li>
+          <br>
+          <li><%= motorcycle.make %></li>
+          <br>
+          <li><%= motorcycle.user.address %></li>
         </ul>
+        </blockquote>
+        <footer class="align-self-end">
+          <small class="text-muted" style="color: black; font-weight: bold;">
+            <%= "$#{motorcycle.price}/per day" %>
+          </small>
+        </footer>
       </div>
     </div>
+  </div>
   <% end %>
 </div>
 
