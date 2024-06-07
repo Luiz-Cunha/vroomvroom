@@ -28,9 +28,11 @@
             <li><strong>Year:</strong> <%= motorcycle.year %></li>
             <li><strong>Address:</strong> <%= motorcycle.user.address %></li>
           </ul>
-           <%= link_to "Edit", edit_motorcycle_path(motorcycle)%>
-           <%= link_to "Delete", motorcycle_path(motorcycle), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
-           <%= link_to "Show details", motorcycle_path(motorcycle) %>
+            <div class="jutify-content-between" role="toolbar" aria-label="Motorcycle Actions">
+              <%= link_to "Edit", edit_motorcycle_path(motorcycle), class: "btn btn-sm btn rounded-pill ms-4 custom-btn" %>
+              <%= link_to "Delete", motorcycle_path(motorcycle), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-sm btn rounded-pill custom-btn"%>
+              <%= link_to "Show details", motorcycle_path(motorcycle), class: "btn btn-sm btn rounded-pill custom-btn" %>
+          </div>
         </div>
       </div>
  <% end %>

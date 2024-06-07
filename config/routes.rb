@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get 'wishlists/create'
   get 'wishlists/destroy'
   get '/dashboard', to: 'dashboards#show', as: 'dashboard'
-  
+
   devise_for :users
 
   resources :motorcycles, only: [:edit, :update, :new, :create, :index, :show, :destroy] do
