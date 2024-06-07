@@ -1,25 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Dashboard</title>
-  <link rel="stylesheet" href="path/to/dashboard.css">
+  <link rel="stylesheet" href="app/assets/stylesheets/dashboard.css">
 </head>
 <body>
-  <h1>Dashboard</h1>
+  <h1 class="header-center">Dashboard</h1>
 
   <div class="dashboard-container">
-    <div class="rented-motorcycles">
+    <div class="section rented-motorcycles">
       <h2>Rented Motorcycles</h2>
       <% if @rented_motorcycles.any? %>
         <% @rented_motorcycles.each do |rented_motorcycle| %>
           <div class="motorcycle-card">
-            <p>
-              <strong>Motorcycle:</strong> <%= rented_motorcycle.motorcycle.make %> <%= rented_motorcycle.motorcycle.model %><br>
-              <strong>Start Date:</strong> <%= rented_motorcycle.start_date %><br>
-              <strong>End Date:</strong> <%= rented_motorcycle.end_date %>
-            </p>
+            <div class="motorcycle-item">
+              <% if rented_motorcycle.motorcycle.photo.present? %>
+                <%= cl_image_tag(rented_motorcycle.motorcycle.photo.key, class: "motorcycle-image") %>
+              <% else %>
+                <%= image_tag('default_motorcycle.png', class: "motorcycle-image", alt: "default motorcycle") %>
+              <% end %>
+              <p>
+                <strong>Motorcycle:</strong> <%= rented_motorcycle.motorcycle.make %> <%= rented_motorcycle.motorcycle.model %><br>
+                <strong>Start Date:</strong> <%= rented_motorcycle.start_date %><br>
+                <strong>End Date:</strong> <%= rented_motorcycle.end_date %>
+              </p>
+            </div>
           </div>
         <% end %>
       <% else %>
@@ -27,40 +29,48 @@
       <% end %>
     </div>
 
-    <div class="listed-motorcycles">
+    <div class="section listed-motorcycles">
       <h2>Listed Motorcycles</h2>
       <% if @listed_motorcycles.any? %>
         <% @listed_motorcycles.each do |motorcycle| %>
           <div class="motorcycle-card">
-            <p>
-              <strong>Motorcycle:</strong> <%= motorcycle.make %> <%= motorcycle.model %><br>
-              <strong>Status:</strong> <% motorcycle.rent_motorcycles.each do |rental| %>
-              <p><%= rental.status %></p>
+            <div class="motorcycle-item">
+              <% if motorcycle.photo.present? %>
+                <%= cl_image_tag(motorcycle.photo.key, class: "motorcycle-image") %>
+              <% else %>
+                <%= image_tag('default_motorcycle.png', class: "motorcycle-image", alt: "default motorcycle") %>
               <% end %>
-            </p>
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                Actions
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li><%= link_to 'Edit', edit_motorcycle_path(motorcycle), class: 'dropdown-item' %></li>
-                <li><%= link_to 'Delete', motorcycle, method: :delete, data: { confirm: 'Are you sure?' }, class: 'dropdown-item' %></li>
-              </ul>
-            </div>
-          </div>
-
-          <h3>Pending Requests</h3>
-          <% motorcycle.rent_motorcycles.where(status: 'pending').each do |request| %>
-            <div class="request-item">
               <p>
-                <strong>Requester:</strong> <%= request.user.name %><br>
-                <strong>Requested Dates:</strong> <%= request.start_date %> to <%= request.end_date %><br>
+                <strong>Motorcycle:</strong> <%= motorcycle.make %> <%= motorcycle.model %><br>
+                <strong>Status:</strong>
+                <% motorcycle.rent_motorcycles.each do |rental| %>
+                  <p><%= rental.status %></p>
+                <% end %>
+              </p>
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                  Actions
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li><%= link_to 'Edit', edit_motorcycle_path(motorcycle), class: 'dropdown-item' %></li>
+                  <li><%= link_to 'Delete', motorcycle, method: :delete, data: { confirm: 'Are you sure?' }, class: 'dropdown-item' %></li>
+                </ul>
+              </div>
+            </div>
+
+            <h3 class="pending-requests-title">Pending Requests</h3>
+            <% motorcycle.rent_motorcycles.where(status: 'pending').each do |request| %>
+              <div class="request-item">
+                <p>
+                  <strong>Requester:</strong> <%= request.user.name %><br>
+                  <strong>Requested Dates:</strong> <%= request.start_date %> to <%= request.end_date %>
+                </p>
                 <%= link_to 'Approve', approve_request_dashboard_path(request), method: :patch, class: 'btn btn-success' %>
                 <%= link_to 'Reject', reject_request_dashboard_path(request), method: :patch, class: 'btn btn-danger' %>
                 <%= link_to 'Decide Later', decide_later_request_dashboard_path(request), method: :patch, class: 'btn btn-warning' %>
-              </p>
-            </div>
-          <% end %>
+              </div>
+            <% end %>
+          </div>
         <% end %>
       <% else %>
         <p>No listed motorcycles.</p>
@@ -68,4 +78,3 @@
     </div>
   </div>
 </body>
-</html>
