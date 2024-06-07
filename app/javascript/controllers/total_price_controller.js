@@ -15,7 +15,7 @@ export default class extends Controller {
 
     const days = this.#dateDifferenceInDays(this.begin, this.end)
     const totalPrice = this.priceValue * days
-    this.inputTarget.innerText = totalPrice / 100
+    this.inputTarget.innerText = `$ ${totalPrice}`
   }
 
   #retriveDateInputAsDate(targets) {
