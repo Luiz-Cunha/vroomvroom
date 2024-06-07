@@ -4,7 +4,11 @@ class MotorcyclesController < ApplicationController
   before_action :set_motorcycle, only: [:show, :edit, :update, :destroy]
 
   def index
-    @motorcycles = Motorcycle.all
+    if params[:query].present?
+      @motorcycles = Motorcycle.search_by_make_and_model(params[:query])
+    else
+      @motorcycles = Motorcycle.all
+    end
   end
 
   def show
