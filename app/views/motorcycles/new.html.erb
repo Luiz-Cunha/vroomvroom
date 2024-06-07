@@ -1,10 +1,13 @@
 <h1 class="text-center my-4">New Motorcycle</h1>
 
-<div class="d-flex justify-content-between">
-  <%= link_to 'Back to Motorcycles', motorcycles_path, class: "btn btn rounded-pill ms-4 custom-btn" %>
-  <%= link_to 'Go to Dashboard', dashboard_path, class: 'btn btn rounded-pill me-4 custom-btn' %>
-</div>
 <div class="container mt-5">
+  <div class="row mb-3">
+    <div class="col-6 d-flex justify-content-start">
+      <%= link_to 'Back to Motorcycles', motorcycles_path, class: "btn btn rounded-pill custom-btn mb-3"%>
+    </div>
+    <div class="col-6 d-flex justify-content-end mb-3 ">
+      <%= link_to 'Dashboard', dashboard_path, class: 'btn btn rounded-pill custom-btn' %>
+    </div>
   <%= simple_form_for @motorcycle, html: { class: 'form-horizontal' } do |f| %>
     <div class="form-group row">
       <div class="col-sm-12">

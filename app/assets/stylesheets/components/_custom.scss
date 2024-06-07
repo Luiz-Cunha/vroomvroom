@@ -2,11 +2,11 @@
   background-color: white;
   color: black;
   border: none;
-  box-shadow: 0 4px 6px rgba(255, 0, 0, 0.3);
+  box-shadow: 0 4px 6px aqua;
   transition: all 0.3s ease;
 
   &:hover {
-    color: red;
-    box-shadow: 0 4px 6px rgba(255, 0, 0, 0.5);
+    color: aqua;
+    box-shadow: 0 4px 6px aqua
   }
 }
