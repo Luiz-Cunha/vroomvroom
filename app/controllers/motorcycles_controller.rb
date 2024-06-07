@@ -23,7 +23,7 @@ class MotorcyclesController < ApplicationController
     @motorcycle = Motorcycle.new(motorcycle_params)
     @motorcycle.user = current_user
     if @motorcycle.save
-      redirect_to motorcycles_path
+      redirect_to dashboard_path, notice: "Motorcycle was successfully created.", status: :see_other
     else
       render :new, status: :unprocessable_entity
     end

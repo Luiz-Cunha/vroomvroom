@@ -1,5 +1,4 @@
-<div class="container">
-<%= link_to 'Back to Motorcycles', motorcycles_path, class: "btn btn-secondary rounded-pill mt-5" %>
+<div class="container mt-5">
   <div class="row">
   <div class="col-lg-6 p-5">
     <div class="card">
@@ -30,8 +29,12 @@
         <label for="total-price" class='form-label'>Total price</label>
         <p class='form-control'name="total-price" id="totalPrice" data-total-price-target='input'></p>
       </div>
-    <%= f.submit class: 'btn btn-secondary rounded-pill' %>
+    <%= f.submit class: 'btn btn rounded-pill custom-btn' %>
   <% end %>
   </div>
   </div>
 </div>
+  <div class="d-flex justify-content-between">
+    <%= link_to 'Back to Motorcycles', motorcycles_path, class: "btn btn rounded-pill btn-sm ms-5 custom-btn"%>
+    <%= link_to 'Go to Dashboard', dashboard_path, class: 'btn btn rounded-pill btn-sm me-5 custom-btn' %>
+  </div>

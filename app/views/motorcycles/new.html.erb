@@ -1,5 +1,10 @@
-<div class="container">
-  <h1 class="text-center my-4">Create a New Motorcycle</h1>
+<h1 class="text-center my-4">New Motorcycle</h1>
+
+<div class="d-flex justify-content-between">
+  <%= link_to 'Back to Motorcycles', motorcycles_path, class: "btn btn rounded-pill ms-4 custom-btn" %>
+  <%= link_to 'Go to Dashboard', dashboard_path, class: 'btn btn rounded-pill me-4 custom-btn' %>
+</div>
+<div class="container mt-5">
   <%= simple_form_for @motorcycle, html: { class: 'form-horizontal' } do |f| %>
     <div class="form-group row">
       <div class="col-sm-12">
@@ -38,7 +43,7 @@
     </div>
     <div class="form-group row">
       <div class="col-sm-12 text-center">
-        <%= f.button :submit, "Create Motorcycle", class: 'btn btn-secondary rounded-pill' %>
+        <%= f.button :submit, "Create Motorcycle", class: 'btn btn rounded-pill custom-btn' %>
       </div>
     </div>
   <% end %>
