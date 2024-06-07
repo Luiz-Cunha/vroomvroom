@@ -1,24 +1,49 @@
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&display=swap'); /* Import Oswald font */
 
-/* Center the Dashboard header */
-.center {
+/* General Styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+}
+
+.header-center {
   text-align: center;
+  font-family: 'Oswald', sans-serif; /* Apply Oswald font */
+  font-weight: 700; /* Bold font weight */
+  font-size: 2.5em; /* Larger font size */
+  margin-bottom: 20px; /* Add some margin below the header */
+  text-transform: uppercase; /* Transform text to uppercase */
 }
 
 /* Dashboard Container */
 .dashboard-container {
-  font-family: 'Roboto', sans-serif;
   display: flex;
   justify-content: space-between;
   padding: 20px;
 }
 
-/* Rented and Listed Motorcycles Containers */
-.rented-motorcycles,
-.listed-motorcycles {
+/* Section Styles */
+.section {
   flex: 1;
   margin-right: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.section:last-child {
+  margin-right: 0;
+}
+
+.section:hover {
+  background-color: #e0e0e0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Motorcycle Card */
@@ -26,20 +51,26 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 20px;
-  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
-  position: relative; /* Ensure positioning context for absolute children */
+  margin-bottom: 20px;
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-/* Hover Effect */
 .motorcycle-card:hover {
   background-color: #f0f0f0;
-  border-color: #333;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Motorcycle Item */
 .motorcycle-item {
-  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.motorcycle-image {
+  width: 150px;  /* Set the desired width */
+  height: auto;  /* Maintain aspect ratio */
+  margin-right: 20px;
+  border-radius: 8px;
 }
 
 /* Dropdown */
@@ -70,11 +101,47 @@
 
 /* Request Item */
 .request-item {
-  margin-top: 20px;
-  display: none;
-  }
+  margin-bottom: 10px;
+}
 
-  /* Hover Effect to Show Pending Requests */
+.pending-requests-title {
+  display: none;
+  margin-top: 20px;
+}
+
+.motorcycle-card:hover .pending-requests-title,
 .motorcycle-card:hover .request-item {
   display: block;
+}
+
+/* Add styles for request buttons */
+.btn {
+  margin-right: 5px;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  color: #212529;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
 }
